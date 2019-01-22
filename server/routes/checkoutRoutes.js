@@ -15,27 +15,34 @@ app.post('/product/:id/:amount', requireLogin, async (req,res)=>{
   var price = productmodel.price;
   var name = productmodel.name;
   var inv = productmodel.inventory;
-  for (i = 0; i < amount; i++) {
-    // only able to add to our cart if the inventory is greater than 0, meaning it is there!
-    if (inv>0){
-      req.user.cart.push([objId,name]);
-      req.user.subtotal += price;
-      inv -=1
-    }
+  if (inv < amount){
+    res.status(401).send("there is not enough inventory!");
 
-    }
-    // so in the req.user.cart, its an array in the form of [code,name]
-    const r  = await user.findOne({_id:req.user.id});
-    r.cart = req.user.cart;
-    r.subtotal = req.user.subtotal;
-    const l = await r.save();
-    console.log("hi")
+  }
+  else{
+    for (i = 0; i < amount; i++) {
+      // only able to add to our cart if the inventory is greater than 0, meaning it is there!
+      if (inv>0){
+        req.user.cart.push([objId,name]);
+        req.user.subtotal += price;
+        inv -=1
+      }
 
-    req.user.save().then((resp)=>{
-      res.send(resp);
-    }, (e) =>{
-      res.status(400).send(e);
-    });
+      }
+      // so in the req.user.cart, its an array in the form of [code,name]
+      const r  = await user.findOne({_id:req.user.id});
+      r.cart = req.user.cart;
+      r.subtotal = req.user.subtotal;
+      const l = await r.save();
+
+      req.user.save().then((resp)=>{
+        res.send(resp);
+      }, (e) =>{
+        res.status(400).send(e);
+      });
+
+  }
+
 
 });
 
