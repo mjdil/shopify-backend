@@ -1,0 +1,14 @@
+Hello, how is it going, i hope everything is going well, this is my shopify coding challenge, i chose to
+use node.js, with mongodb, and in addition to adding the basic purchasing functionality, i added  more
+common functionalities, and cart funtionalities, and in order to get the back-end to feel secure and also 'cool'
+I decided to incorporate cookie authorization with google oauth.
+Another not is that I wanted to do a lot with this challenge such as Unit Tests, but recently a family memeber
+got fairly sick so I was super busy helping them, so the timing for this was very weird, so I tried to
+crank this out in a short amount of time, I hope thats okay, thanks for reading  :)
+
+
+- in order to run this API, run 'node server.js',
+- NOTE: in order to properly test the authentification and the logic, you can make the requests through
+chrome developer tools, or you can use Postman, but will need to set up OAUTH token there, which could be
+tedious, so the easiest way would be through chrome developer tools, and if you want to see it displayed
+the github link 'https://github.com/mjdil/shopify-backend' can walkthrough the basic features,
